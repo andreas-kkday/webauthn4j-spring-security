@@ -51,20 +51,23 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
+	maven {
+	    url "https://repo.spring.io/plugins-release/"
+	}
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
         classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:$sonarqubeVersion")
         classpath("org.asciidoctor:asciidoctor-gradle-jvm:$asciidoctorGradleVersion")
         classpath("org.jfrog.buildinfo:build-info-extractor-gradle:$artifactoryVersion")
-        classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintrayVersion")
-        classpath("org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion")
+//        classpath("com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintrayVersion")
+//        classpath("org.codehaus.groovy.modules.http-builder:http-builder:$httpBuilderVersion")
     }
 
 }
 
 apply plugin: 'org.sonarqube'
-apply plugin: 'com.jfrog.artifactory'
+//apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'org.asciidoctor.jvm.convert'
 
 
@@ -73,6 +76,9 @@ version "${webAuthn4JSpringSecurityVersion}"
 
 repositories {
     mavenCentral() //for jruby used in asciidoctorj
+    maven {
+	url "https://repo.spring.io/plugins-release/"
+    }
 }
 
 def sampleAppProjects = subprojects.findAll { ["fido-server-conformance-test-app", "spa", "spa-angular-client", "mpa"].contains(it.name) }
